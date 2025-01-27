@@ -1,0 +1,23 @@
+"Hermetic toolchain for cortecs"
+module(name = "cortecs-cc-toolchain")
+
+bazel_dep(name = "rules_cc", version = "0.1.0")
+bazel_dep(name = "bazel_skylib", version = "1.7.1")
+bazel_dep(name = "platforms", version = "0.0.11")
+
+# Problem: Even with xz compression, the total bin size for all the platforms is still quite large.
+# Solution: Store the large binaries in separate repositories.
+# Problem: It seems that bazel defaults to fetching all bazel_dep dependencies even if they're not used.
+# Solution: Use git_repository dependencies because they are only downloaded when referenced.
+git_repository = use_repo_rule("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+git_repository(
+    name = "linux-x86_64",
+    remote = "https://github.com/cortecs-lang/cortecs-cc-toolchain-linux-x86_64.git",
+    commit = "f2712ccf810aa761ec036ff7e094a98a669c6323",
+)
+
+git_repository(
+    name = "windows-x86_64",
+    remote = "https://github.com/cortecs-lang/cortecs-cc-toolchain-windows-x86_64.git",
+    commit = "2c2b797904f4949ccdd749eedac56a767f3517b8",
+)

@@ -1,0 +1,31 @@
+OUTS = [
+    "bmi2intrin.h",
+    "xmmintrin.h",
+    "tmmintrin.h",
+    "emmintrin.h",
+    "bmiintrin.h",
+    "nmmintrin.h",
+    "mmintrin.h",
+    "smmintrin.h",
+    "x86intrin.h",
+    "x86gprintrin.h",
+    "pmmintrin.h",
+    "immintrin.h",
+    "mm_malloc.h",
+]
+
+OUTS_TARGETS = [
+    ":bmi2intrin.h",
+    ":xmmintrin.h",
+    ":tmmintrin.h",
+    ":emmintrin.h",
+    ":bmiintrin.h",
+    ":nmmintrin.h",
+    ":mmintrin.h",
+    ":smmintrin.h",
+    ":x86intrin.h",
+    ":x86gprintrin.h",
+    ":pmmintrin.h",
+    ":immintrin.h",
+    ":mm_malloc.h",
+]
