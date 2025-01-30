@@ -19,11 +19,11 @@ package(default_visibility = ["//visibility:public"])
 genrule(
     name = "produce_llvm",
     srcs = select({
-        "//constraint:linux_x86_64": ["@linux-x86_64//bin:llvm.tar.xz"],
+        "//constraint:linux_x86_64": ["@linux-x86_64//:llvm.tar.xz"],
     }),
     outs = ["llvm"],
     cmd = select({
-        "//constraint:linux_x86_64": "time tar xf $(location @linux-x86_64//bin:llvm.tar.xz) -C $(@D)",
+        "//constraint:linux_x86_64": "time tar xf $(location @linux-x86_64//:llvm.tar.xz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )

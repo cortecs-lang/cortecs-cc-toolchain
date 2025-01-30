@@ -1,5 +1,9 @@
+load("@linux-x86_64//:libclang-libs.bzl", "LIBCLANG_LIBS_OUTS")
 load("@rules_cc//cc/toolchains:tool.bzl", "cc_tool")
 load("@rules_cc//cc/toolchains:tool_map.bzl", "cc_tool_map")
+load(":libclang-includes.bzl", "LIBCLANG_INCLUDES_OUTS")
+
+package(default_visibility = ["//visibility:public"])
 
 # quickly writing down some things before I forget. I need to go back and better document all this
 # I had to move libc++.a and libunwind.a from clang to sysroot
@@ -21,7 +25,7 @@ cc_tool(
     src = select({
         "//conditions:default": "//clang/bin:clang",
     }),
-    data = ["//clang/lib/clang/19/include:clang-includes"],
+    data = [":libclang-includes"],
 )
 
 cc_tool(
@@ -35,6 +39,12 @@ cc_tool(
     name = "lld",
     src = select({
         "//constraint:linux_x86_64": "//clang/bin:clang++",
+    }),
+    data = select({
+        "//constraint:linux_x86_64": [
+            "//clang/bin:linker-files",
+            #"//clang/lib/clang/19/lib/x86_64-unknown-linux-gnu:extract_lib",
+        ],
     }),
 )
 
@@ -64,4 +74,20 @@ cc_tool(
     src = select({
         "//conditions:default": "//clang/bin:llvm-strip",
     }),
+)
+
+genrule(
+    name = "libclang-includes",
+    srcs = ["libclang-includes.tar.xz"],
+    outs = LIBCLANG_INCLUDES_OUTS,
+    cmd = "tar xvf $(location libclang-includes.tar.xz) -C $(RULEDIR)",
+    tags = ["no-remote-cache"],
+)
+
+genrule(
+    name = "libclang-libs-linux-x86_64",
+    srcs = ["@linux-x86_64//:libclang-libs.tar.xz"],
+    outs = LIBCLANG_LIBS_OUTS,
+    cmd = "tar xvf $(location @linux-x86_64//:libclang-libs.tar.xz) -C $(RULEDIR)",
+    tags = ["no-remote-cache"],
 )

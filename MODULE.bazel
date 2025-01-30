@@ -13,11 +13,18 @@ git_repository = use_repo_rule("@bazel_tools//tools/build_defs/repo:git.bzl", "g
 git_repository(
     name = "linux-x86_64",
     remote = "https://github.com/cortecs-lang/cortecs-cc-toolchain-linux-x86_64.git",
-    commit = "f2712ccf810aa761ec036ff7e094a98a669c6323",
+    commit = "e222bc19dd086c4af6573bdca2614588a6ac4e56",
 )
 
 git_repository(
     name = "windows-x86_64",
     remote = "https://github.com/cortecs-lang/cortecs-cc-toolchain-windows-x86_64.git",
     commit = "2c2b797904f4949ccdd749eedac56a767f3517b8",
+)
+
+bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
+git_override(
+    module_name = "hedron_compile_commands",
+    remote = "https://github.com/hedronvision/bazel-compile-commands-extractor.git",
+    commit = "4f28899228fb3ad0126897876f147ca15026151e",
 )
