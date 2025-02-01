@@ -17,14 +17,13 @@ git_repository(
 )
 
 git_repository(
+    name = "ubuntu-x86_64",
+    remote = "https://github.com/cortecs-lang/cortecs-sysroot-ubuntu-x86_64.git",
+    commit = "07621159466512bd7d0012d778e40929a0859ebf",
+)
+
+git_repository(
     name = "windows-x86_64",
     remote = "https://github.com/cortecs-lang/cortecs-cc-toolchain-windows-x86_64.git",
     commit = "2c2b797904f4949ccdd749eedac56a767f3517b8",
-)
-
-bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
-git_override(
-    module_name = "hedron_compile_commands",
-    remote = "https://github.com/hedronvision/bazel-compile-commands-extractor.git",
-    commit = "4f28899228fb3ad0126897876f147ca15026151e",
 )
