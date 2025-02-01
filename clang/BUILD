@@ -42,8 +42,8 @@ cc_tool(
     }),
     data = select({
         "//constraint:linux_x86_64": [
+            ":libclang-libs-linux-x86_64",
             "//clang/bin:linker-files",
-            #"//clang/lib/clang/19/lib/x86_64-unknown-linux-gnu:extract_lib",
         ],
     }),
 )

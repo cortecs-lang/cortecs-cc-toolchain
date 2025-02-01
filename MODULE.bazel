@@ -19,7 +19,7 @@ git_repository(
 git_repository(
     name = "ubuntu-x86_64",
     remote = "https://github.com/cortecs-lang/cortecs-sysroot-ubuntu-x86_64.git",
-    commit = "07621159466512bd7d0012d778e40929a0859ebf",
+    commit = "7459b770da84aab61b5adf56e0aaa9e129ad2100",
 )
 
 git_repository(
