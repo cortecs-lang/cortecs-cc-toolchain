@@ -6,7 +6,7 @@ cc_sysroot(
     data = [
         "//sysroot:root",
         "//sysroot:usr-include",
-        "//sysroot:usr-include-x86_64-linux-gnu",
+        "//sysroot:usr-lib",
     ],
     sysroot = "//sysroot:root",
     visibility = ["//visibility:public"],
@@ -19,5 +19,60 @@ cc_args(
         "@rules_cc//cc/toolchains/actions:cpp_compile_actions",
     ],
     args = ["-no-canonical-prefixes"],
+    visibility = ["//visibility:public"],
+)
+
+cc_args(
+    name = "nostd",
+    actions = [
+        "@rules_cc//cc/toolchains/actions:c_compile",
+        "@rules_cc//cc/toolchains/actions:cpp_compile_actions",
+        "@rules_cc//cc/toolchains/actions:link_actions",
+    ],
+    args = [
+        "-nostdinc",
+        "-nostdinc++",
+        "-nostdlibinc",
+        "-nostdlib",
+        "-nostdlib++",
+        "-nodefaultlibs",
+        "-nostartfiles",
+        "-v",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+cc_args(
+    name = "isystem",
+    actions = [
+        "@rules_cc//cc/toolchains/actions:c_compile",
+        "@rules_cc//cc/toolchains/actions:cpp_compile_actions",
+    ],
+    args = [
+        "-isystem",
+        "{usr_include}",
+    ],
+    format = {
+        "usr_include": "//sysroot:usr-include",
+    },
+    visibility = ["//visibility:public"],
+)
+
+cc_args(
+    name = "link-dirs",
+    actions = [
+        "@rules_cc//cc/toolchains/actions:link_actions",
+    ],
+    args = [
+        "-fuse-ld=lld",
+        "-L{usr_lib}",
+        "-lc",
+        "{usr_lib}/crt1.o",
+        "{usr_lib}/crti.o",
+        "{usr_lib}/crtn.o",
+    ],
+    format = {
+        "usr_lib": "//sysroot:usr-lib",
+    },
     visibility = ["//visibility:public"],
 )

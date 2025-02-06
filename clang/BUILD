@@ -1,7 +1,7 @@
-load("@linux-x86_64//:libclang-libs.bzl", "LIBCLANG_LIBS_OUTS")
+# load("@linux-x86_64//:libclang-libs.bzl", "LIBCLANG_LIBS_OUTS")
 load("@rules_cc//cc/toolchains:tool.bzl", "cc_tool")
 load("@rules_cc//cc/toolchains:tool_map.bzl", "cc_tool_map")
-load(":libclang-includes.bzl", "LIBCLANG_INCLUDES_OUTS")
+load(":clang19-headers.bzl", "CLANG19_HEADERS_OUTS")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -25,7 +25,7 @@ cc_tool(
     src = select({
         "//conditions:default": "//clang/bin:clang",
     }),
-    data = [":libclang-includes"],
+    data = [":clang-headers"],
 )
 
 cc_tool(
@@ -33,6 +33,7 @@ cc_tool(
     src = select({
         "//conditions:default": "//clang/bin:clang++",
     }),
+    data = [":clang-headers"],
 )
 
 cc_tool(
@@ -42,7 +43,7 @@ cc_tool(
     }),
     data = select({
         "//constraint:linux_x86_64": [
-            ":libclang-libs-linux-x86_64",
+            # ":libclang-libs-linux-x86_64",
             "//clang/bin:linker-files",
         ],
     }),
@@ -77,17 +78,17 @@ cc_tool(
 )
 
 genrule(
-    name = "libclang-includes",
-    srcs = ["libclang-includes.tar.xz"],
-    outs = LIBCLANG_INCLUDES_OUTS,
-    cmd = "tar xvf $(location libclang-includes.tar.xz) -C $(RULEDIR)",
+    name = "clang-headers",
+    srcs = ["clang19-headers-19.1.7-r0.apk"],
+    outs = CLANG19_HEADERS_OUTS,
+    cmd = "tar --strip-components=3 -xf $(location clang19-headers-19.1.7-r0.apk) -C $(RULEDIR) &> /dev/null",
     tags = ["no-remote-cache"],
 )
 
-genrule(
-    name = "libclang-libs-linux-x86_64",
-    srcs = ["@linux-x86_64//:libclang-libs.tar.xz"],
-    outs = LIBCLANG_LIBS_OUTS,
-    cmd = "tar xvf $(location @linux-x86_64//:libclang-libs.tar.xz) -C $(RULEDIR)",
-    tags = ["no-remote-cache"],
-)
+# genrule(
+#     name = "libclang-libs-linux-x86_64",
+#     srcs = ["@linux-x86_64//:libclang-libs.tar.xz"],
+#     outs = LIBCLANG_LIBS_OUTS,
+#     cmd = "tar xvf $(location @linux-x86_64//:libclang-libs.tar.xz) -C $(RULEDIR)",
+#     tags = ["no-remote-cache"],
+# )

@@ -11,31 +11,16 @@
 #          from the cache instead of decompressing them locally.
 # Solution: Add the "no-remote-cache" tag to all genrules to prevent this.
 
-# Note: The linux x86_64 distribution is just a large llvm binary with a bunch of symlinks.
-#       The symlinks are necessary because llvm uses the name of the symlink to determine which tool to use.
-
 package(default_visibility = ["//visibility:public"])
-
-genrule(
-    name = "produce_llvm",
-    srcs = select({
-        "//constraint:linux_x86_64": ["@linux-x86_64//:llvm.tar.xz"],
-    }),
-    outs = ["llvm"],
-    cmd = select({
-        "//constraint:linux_x86_64": "time tar xf $(location @linux-x86_64//:llvm.tar.xz) -C $(@D)",
-    }),
-    tags = ["no-remote-cache"],
-)
 
 genrule(
     name = "produce_clang",
     srcs = select({
-        "//constraint:linux_x86_64": [":llvm"],
+        "//constraint:linux_x86_64": ["@linux-x86_64//:clang.tar.xz"],
     }),
     outs = ["clang"],
     cmd = select({
-        "//constraint:linux_x86_64": "ln -s llvm $(@D)/clang",
+        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:clang.tar.xz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -43,59 +28,11 @@ genrule(
 genrule(
     name = "produce_clang++",
     srcs = select({
-        "//constraint:linux_x86_64": [":llvm"],
+        "//constraint:linux_x86_64": [":clang"],
     }),
     outs = ["clang++"],
     cmd = select({
-        "//constraint:linux_x86_64": "ln -s llvm $(@D)/clang++",
-    }),
-    tags = ["no-remote-cache"],
-)
-
-genrule(
-    name = "produce_ld_lld",
-    srcs = select({
-        "//constraint:linux_x86_64": [":llvm"],
-    }),
-    outs = ["ld.lld"],
-    cmd = select({
-        "//constraint:linux_x86_64": "ln -s llvm $(@D)/ld.lld",
-    }),
-    tags = ["no-remote-cache"],
-)
-
-genrule(
-    name = "produce_ld64_lld",
-    srcs = select({
-        "//constraint:linux_x86_64": [":llvm"],
-    }),
-    outs = ["ld64.lld"],
-    cmd = select({
-        "//constraint:linux_x86_64": "ln -s llvm $(@D)/ld64.lld",
-    }),
-    tags = ["no-remote-cache"],
-)
-
-genrule(
-    name = "produce_lld",
-    srcs = select({
-        "//constraint:linux_x86_64": [":llvm"],
-    }),
-    outs = ["lld"],
-    cmd = select({
-        "//constraint:linux_x86_64": "ln -s llvm $(@D)/lld",
-    }),
-    tags = ["no-remote-cache"],
-)
-
-genrule(
-    name = "produce_lld-link",
-    srcs = select({
-        "//constraint:linux_x86_64": [":llvm"],
-    }),
-    outs = ["lld-link"],
-    cmd = select({
-        "//constraint:linux_x86_64": "ln -s llvm $(@D)/lld-link",
+        "//constraint:linux_x86_64": "ln -s clang $(@D)/clang++",
     }),
     tags = ["no-remote-cache"],
 )
@@ -103,23 +40,11 @@ genrule(
 genrule(
     name = "produce_llvm-ar",
     srcs = select({
-        "//constraint:linux_x86_64": [":llvm"],
+        "//constraint:linux_x86_64": ["@linux-x86_64//:llvm-ar.tar.xz"],
     }),
     outs = ["llvm-ar"],
     cmd = select({
-        "//constraint:linux_x86_64": "ln -s llvm $(@D)/llvm-ar",
-    }),
-    tags = ["no-remote-cache"],
-)
-
-genrule(
-    name = "produce_llvm-objcopy",
-    srcs = select({
-        "//constraint:linux_x86_64": [":llvm"],
-    }),
-    outs = ["llvm-objcopy"],
-    cmd = select({
-        "//constraint:linux_x86_64": "ln -s llvm $(@D)/llvm-objcopy",
+        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:llvm-ar.tar.xz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -127,11 +52,23 @@ genrule(
 genrule(
     name = "produce_llvm-objdump",
     srcs = select({
-        "//constraint:linux_x86_64": [":llvm"],
+        "//constraint:linux_x86_64": ["@linux-x86_64//:llvm-objdump.tar.xz"],
     }),
     outs = ["llvm-objdump"],
     cmd = select({
-        "//constraint:linux_x86_64": "ln -s llvm $(@D)/llvm-objdump",
+        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:llvm-objdump.tar.xz) -C $(@D)",
+    }),
+    tags = ["no-remote-cache"],
+)
+
+genrule(
+    name = "produce_llvm-objcopy",
+    srcs = select({
+        "//constraint:linux_x86_64": ["@linux-x86_64//:llvm-objcopy.tar.xz"],
+    }),
+    outs = ["llvm-objcopy"],
+    cmd = select({
+        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:llvm-objcopy.tar.xz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -139,11 +76,11 @@ genrule(
 genrule(
     name = "produce_llvm-strip",
     srcs = select({
-        "//constraint:linux_x86_64": [":llvm"],
+        "//constraint:linux_x86_64": [":llvm-objcopy"],
     }),
     outs = ["llvm-strip"],
     cmd = select({
-        "//constraint:linux_x86_64": "ln -s llvm $(@D)/llvm-strip",
+        "//constraint:linux_x86_64": "ln -s llvm-objcopy $(@D)/llvm-strip",
     }),
     tags = ["no-remote-cache"],
 )
@@ -159,4 +96,52 @@ filegroup(
             ":lld-link",
         ],
     }),
+)
+
+genrule(
+    name = "produce_lld",
+    srcs = select({
+        "//constraint:linux_x86_64": ["@linux-x86_64//:lld.tar.xz"],
+    }),
+    outs = ["lld"],
+    cmd = select({
+        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:lld.tar.xz) -C $(@D)",
+    }),
+    tags = ["no-remote-cache"],
+)
+
+genrule(
+    name = "produce_ld_lld",
+    srcs = select({
+        "//constraint:linux_x86_64": [":lld"],
+    }),
+    outs = ["ld.lld"],
+    cmd = select({
+        "//constraint:linux_x86_64": "ln -s lld $(@D)/ld.lld",
+    }),
+    tags = ["no-remote-cache"],
+)
+
+genrule(
+    name = "produce_ld64_lld",
+    srcs = select({
+        "//constraint:linux_x86_64": [":lld"],
+    }),
+    outs = ["ld64.lld"],
+    cmd = select({
+        "//constraint:linux_x86_64": "ln -s lld $(@D)/ld64.lld",
+    }),
+    tags = ["no-remote-cache"],
+)
+
+genrule(
+    name = "produce_lld-link",
+    srcs = select({
+        "//constraint:linux_x86_64": [":lld"],
+    }),
+    outs = ["lld-link"],
+    cmd = select({
+        "//constraint:linux_x86_64": "ln -s lld $(@D)/lld-link",
+    }),
+    tags = ["no-remote-cache"],
 )

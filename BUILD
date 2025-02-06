@@ -7,6 +7,9 @@ cc_toolchain(
     args = [
         "//args:no_canonical_prefixes",
         "//args:linux_sysroot",
+        "//args:nostd",
+        "//args:isystem",
+        "//args:link-dirs",
     ],
     enabled_features = ["@rules_cc//cc/toolchains/args:experimental_replace_legacy_action_config_features"],
     known_features = ["@rules_cc//cc/toolchains/args:experimental_replace_legacy_action_config_features"],

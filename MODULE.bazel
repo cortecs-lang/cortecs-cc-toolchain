@@ -13,13 +13,13 @@ git_repository = use_repo_rule("@bazel_tools//tools/build_defs/repo:git.bzl", "g
 git_repository(
     name = "linux-x86_64",
     remote = "https://github.com/cortecs-lang/cortecs-cc-toolchain-linux-x86_64.git",
-    commit = "e222bc19dd086c4af6573bdca2614588a6ac4e56",
+    commit = "0475337c0fb2448db8e5d5875537cc2839da4c9b",
 )
 
 git_repository(
-    name = "ubuntu-x86_64",
-    remote = "https://github.com/cortecs-lang/cortecs-sysroot-ubuntu-x86_64.git",
-    commit = "7459b770da84aab61b5adf56e0aaa9e129ad2100",
+    name = "alpine-x86_64",
+    remote = "https://github.com/cortecs-lang/cortecs-sysroot-alpine-x86_64.git",
+    commit = "89cea18343b97e5726591176ee2c0a616af6a78b",
 )
 
 git_repository(
