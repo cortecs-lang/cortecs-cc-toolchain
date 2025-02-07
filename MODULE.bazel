@@ -19,7 +19,7 @@ git_repository(
 git_repository(
     name = "alpine-x86_64",
     remote = "https://github.com/cortecs-lang/cortecs-sysroot-alpine-x86_64.git",
-    commit = "89cea18343b97e5726591176ee2c0a616af6a78b",
+    commit = "0e3ffcf04301cfa990aec54cfe585180496202ca",
 )
 
 git_repository(

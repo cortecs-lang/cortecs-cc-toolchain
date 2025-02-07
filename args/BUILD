@@ -50,10 +50,13 @@ cc_args(
     ],
     args = [
         "-isystem",
+        "{cxx_include}",
+        "-isystem",
         "{usr_include}",
     ],
     format = {
         "usr_include": "//sysroot:usr-include",
+        "cxx_include": "//sysroot:usr-include-c++-v1",
     },
     visibility = ["//visibility:public"],
 )
@@ -64,9 +67,15 @@ cc_args(
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
     args = [
+        # with out this, clang was using /usr/bin/ld over the lld from the toolchain
+        # just make sure if youre ever getting a weird linker error, that with -v, lld is being used
         "-fuse-ld=lld",
         "-L{usr_lib}",
         "-lc",
+        "-lc++",
+        "-lc++abi",
+        "-lunwind",
+        "-llzma",
         "{usr_lib}/crt1.o",
         "{usr_lib}/crti.o",
         "{usr_lib}/crtn.o",
