@@ -53,6 +53,8 @@ genrule(
     tags = ["no-remote-cache"],
 )
 
+# required for libunwind.
+# I was seeing missing lzma_stream_* and lzma_index_* symbols without these.
 genrule(
     name = "alpine-xz-dev",
     srcs = ["@alpine-x86_64//:xz-dev-5.6.4-r0.apk"],
@@ -61,8 +63,6 @@ genrule(
     tags = ["no-remote-cache"],
 )
 
-# required for libunwind.
-# I was seeing missing lzma_stream_* and lzma_index_* symbols without this.
 genrule(
     name = "alpine-xz-static",
     srcs = ["@alpine-x86_64//:xz-static-5.6.4-r0.apk"],
