@@ -27,17 +27,38 @@ cc_args(
     actions = [
         "@rules_cc//cc/toolchains/actions:c_compile",
         "@rules_cc//cc/toolchains/actions:cpp_compile_actions",
+    ],
+    args = [
+        "-nostdinc",
+        "-nostdlib",
+        "-nodefaultlibs",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+cc_args(
+    name = "nostd++",
+    actions = [
+        "@rules_cc//cc/toolchains/actions:cpp_compile_actions",
+    ],
+    args = [
+        "-nostdinc++",
+        "-nostdlib++",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+cc_args(
+    name = "nostd_link",
+    actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
     args = [
         "-nostdinc",
-        "-nostdinc++",
-        "-nostdlibinc",
         "-nostdlib",
-        "-nostdlib++",
         "-nodefaultlibs",
-        "-nostartfiles",
-        "-v",
+        "-nostdinc++",
+        "-nostdlib++",
     ],
     visibility = ["//visibility:public"],
 )
@@ -62,7 +83,7 @@ cc_args(
 )
 
 cc_args(
-    name = "link-dirs",
+    name = "link-general",
     actions = [
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
@@ -76,6 +97,20 @@ cc_args(
         "-lc++abi",
         "-lunwind",
         "-llzma",
+        "-pthread",
+    ],
+    format = {
+        "usr_lib": "//sysroot:usr-lib",
+    },
+    visibility = ["//visibility:public"],
+)
+
+cc_args(
+    name = "link-executable",
+    actions = [
+        "@rules_cc//cc/toolchains/actions:link_executable_actions",
+    ],
+    args = [
         "{usr_lib}/crt1.o",
         "{usr_lib}/crti.o",
         "{usr_lib}/crtn.o",
