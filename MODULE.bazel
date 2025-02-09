@@ -1,7 +1,7 @@
 "Hermetic toolchain for cortecs"
 module(name = "cortecs-cc-toolchain")
 
-bazel_dep(name = "rules_cc", version = "0.1.0")
+bazel_dep(name = "rules_cc", version = "0.1.1")
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
 bazel_dep(name = "platforms", version = "0.0.11")
 
@@ -25,5 +25,5 @@ git_repository(
 git_repository(
     name = "windows-x86_64",
     remote = "https://github.com/cortecs-lang/cortecs-cc-toolchain-windows-x86_64.git",
-    commit = "2c2b797904f4949ccdd749eedac56a767f3517b8",
+    commit = "d53771c1bcb4290a8fb1c54516510acffb2a140d",
 )

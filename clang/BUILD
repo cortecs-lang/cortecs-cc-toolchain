@@ -23,6 +23,7 @@ cc_tool_map(
 cc_tool(
     name = "clang",
     src = select({
+        "@platforms//os:windows": "//clang/bin:clang.exe",
         "//conditions:default": "//clang/bin:clang",
     }),
     data = [":clang-headers"],
@@ -31,6 +32,7 @@ cc_tool(
 cc_tool(
     name = "clang++",
     src = select({
+        "@platforms//os:windows": "//clang/bin:clang++.exe",
         "//conditions:default": "//clang/bin:clang++",
     }),
     data = [":clang-headers"],
@@ -39,7 +41,8 @@ cc_tool(
 cc_tool(
     name = "lld",
     src = select({
-        "//constraint:linux_x86_64": "//clang/bin:clang++",
+        "@platforms//os:windows": "//clang/bin:clang++.exe",
+        "//conditions:default": "//clang/bin:clang++",
     }),
     data = select({
         "//constraint:linux_x86_64": [
@@ -52,6 +55,7 @@ cc_tool(
 cc_tool(
     name = "llvm-ar",
     src = select({
+        "@platforms//os:windows": "//clang/bin:llvm-ar.exe",
         "//conditions:default": "//clang/bin:llvm-ar",
     }),
 )
@@ -59,6 +63,7 @@ cc_tool(
 cc_tool(
     name = "llvm-objcopy",
     src = select({
+        "@platforms//os:windows": "//clang/bin:llvm-objcopy.exe",
         "//conditions:default": "//clang/bin:llvm-objcopy",
     }),
 )
@@ -66,6 +71,7 @@ cc_tool(
 cc_tool(
     name = "llvm-objdump",
     src = select({
+        "@platforms//os:windows": "//clang/bin:llvm-objdump.exe",
         "//conditions:default": "//clang/bin:llvm-objdump",
     }),
 )
@@ -73,6 +79,7 @@ cc_tool(
 cc_tool(
     name = "llvm-strip",
     src = select({
+        "@platforms//os:windows": "//clang/bin:llvm-strip.exe",
         "//conditions:default": "//clang/bin:llvm-strip",
     }),
 )

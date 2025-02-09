@@ -1,8 +1,24 @@
 load("@rules_cc//cc/toolchains:args.bzl", "cc_args")
+load("@rules_cc//cc/toolchains:args_list.bzl", "cc_args_list")
 load("@rules_cc//cc/toolchains/args:sysroot.bzl", "cc_sysroot")
 
+cc_args_list(
+    name = "args",
+    args = [
+        ":no_canonical_prefixes",
+        ":sysroot",
+        ":nostd",
+        ":nostd++",
+        ":nostd_link",
+        ":isystem",
+        ":link-general",
+        ":link-executable",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 cc_sysroot(
-    name = "linux_sysroot",
+    name = "sysroot",
     data = [
         "//sysroot:root",
         "//sysroot:usr-include",

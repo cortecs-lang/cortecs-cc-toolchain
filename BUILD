@@ -4,16 +4,9 @@ package(default_visibility = ["//visibility:public"])
 
 cc_toolchain(
     name = "host_clang",
-    args = [
-        "//args:no_canonical_prefixes",
-        "//args:linux_sysroot",
-        "//args:nostd",
-        "//args:nostd++",
-        "//args:nostd_link",
-        "//args:isystem",
-        "//args:link-general",
-        "//args:link-executable",
-    ],
+    args = select({
+        "@platforms//os:linux": ["//args/linux:args"],
+    }),
     enabled_features = ["@rules_cc//cc/toolchains/args:experimental_replace_legacy_action_config_features"],
     known_features = ["@rules_cc//cc/toolchains/args:experimental_replace_legacy_action_config_features"],
     tool_map = "//clang:all_tools",
