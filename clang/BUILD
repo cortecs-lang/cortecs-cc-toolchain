@@ -44,12 +44,9 @@ cc_tool(
         "@platforms//os:windows": "//clang/bin:clang++.exe",
         "//conditions:default": "//clang/bin:clang++",
     }),
-    data = select({
-        "//constraint:linux_x86_64": [
-            # ":libclang-libs-linux-x86_64",
-            "//clang/bin:linker-files",
-        ],
-    }),
+    data = [
+        "//clang/bin:linker-files",
+    ],
 )
 
 cc_tool(
