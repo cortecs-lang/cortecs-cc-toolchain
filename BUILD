@@ -6,7 +6,7 @@ cc_toolchain(
     name = "host_clang",
     args = select({
         "@platforms//os:linux": ["//args/linux:args"],
-        "@platforms//os:windows": [],
+        "@platforms//os:windows": ["//args/windows:args"],
     }),
     enabled_features = ["@rules_cc//cc/toolchains/args:experimental_replace_legacy_action_config_features"],
     known_features = ["@rules_cc//cc/toolchains/args:experimental_replace_legacy_action_config_features"],

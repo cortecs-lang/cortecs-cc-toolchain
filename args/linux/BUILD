@@ -20,11 +20,11 @@ cc_args_list(
 cc_sysroot(
     name = "sysroot",
     data = [
-        "//sysroot:root",
-        "//sysroot:usr-include",
-        "//sysroot:usr-lib",
+        "//sysroot/alpine:root",
+        "//sysroot/alpine:usr-include",
+        "//sysroot/alpine:usr-lib",
     ],
-    sysroot = "//sysroot:root",
+    sysroot = "//sysroot/alpine:root",
     visibility = ["//visibility:public"],
 )
 
@@ -92,8 +92,8 @@ cc_args(
         "{usr_include}",
     ],
     format = {
-        "usr_include": "//sysroot:usr-include",
-        "cxx_include": "//sysroot:usr-include-c++-v1",
+        "usr_include": "//sysroot/alpine:usr-include",
+        "cxx_include": "//sysroot/alpine:usr-include-c++-v1",
     },
     visibility = ["//visibility:public"],
 )
@@ -116,7 +116,7 @@ cc_args(
         "-pthread",
     ],
     format = {
-        "usr_lib": "//sysroot:usr-lib",
+        "usr_lib": "//sysroot/alpine:usr-lib",
     },
     visibility = ["//visibility:public"],
 )
@@ -132,7 +132,7 @@ cc_args(
         "{usr_lib}/crtn.o",
     ],
     format = {
-        "usr_lib": "//sysroot:usr-lib",
+        "usr_lib": "//sysroot/alpine:usr-lib",
     },
     visibility = ["//visibility:public"],
 )
