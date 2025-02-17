@@ -85,7 +85,8 @@ genrule(
     name = "clang-headers",
     srcs = ["clang19-headers-19.1.7-r0.apk"],
     outs = CLANG19_HEADERS_OUTS,
-    cmd = "tar --strip-components=3 -xf $(location clang19-headers-19.1.7-r0.apk) -C $(RULEDIR) &> /dev/null",
+    cmd = "tar --strip-components=3 -xf $(location clang19-headers-19.1.7-r0.apk) -C $(RULEDIR)",
+    cmd_bat = "tar --strip-components=3 -xf $(location clang19-headers-19.1.7-r0.apk) -C $(RULEDIR)",
     tags = ["no-remote-cache"],
 )
 
