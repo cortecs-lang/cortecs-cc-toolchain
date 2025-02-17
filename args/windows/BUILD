@@ -5,7 +5,7 @@ cc_args_list(
     name = "args",
     args = [
         ":no_canonical_prefixes",
-        # ":nostd",
+        ":nostd",
         # ":nostd++",
         # ":nostd_link",
         ":isystem",
@@ -25,19 +25,19 @@ cc_args(
     visibility = ["//visibility:public"],
 )
 
-# cc_args(
-#     name = "nostd",
-#     actions = [
-#         "@rules_cc//cc/toolchains/actions:c_compile",
-#         "@rules_cc//cc/toolchains/actions:cpp_compile_actions",
-#     ],
-#     args = [
-#         "-nostdinc",
-#         "-nostdlib",
-#         "-nodefaultlibs",
-#     ],
-#     visibility = ["//visibility:public"],
-# )
+cc_args(
+    name = "nostd",
+    actions = [
+        "@rules_cc//cc/toolchains/actions:c_compile",
+        "@rules_cc//cc/toolchains/actions:cpp_compile_actions",
+    ],
+    args = [
+        "-nostdinc",
+        "-nostdlib",
+        "-nodefaultlibs",
+    ],
+    visibility = ["//visibility:public"],
+)
 
 # cc_args(
 #     name = "nostd++",
