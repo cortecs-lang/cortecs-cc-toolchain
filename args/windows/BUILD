@@ -5,6 +5,7 @@ cc_args_list(
     name = "args",
     args = [
         ":no_canonical_prefixes",
+        ":sysroot",
         ":nostd",
         # ":nostd++",
         ":nostd_link",
@@ -12,6 +13,17 @@ cc_args_list(
         ":link-general",
         # ":link-executable",
     ],
+    visibility = ["//visibility:public"],
+)
+
+cc_sysroot(
+    name = "sysroot",
+    data = [
+        "//sysroot/windows:include",
+        "//sysroot/windows:lib",
+        "//sysroot/windows:root",
+    ],
+    sysroot = "//sysroot/windows:root",
     visibility = ["//visibility:public"],
 )
 
