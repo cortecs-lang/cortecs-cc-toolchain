@@ -8,7 +8,7 @@ genrule(
     name = "ucrt-headers",
     srcs = ["@windows-sysroot-x86_64//:ucrt-headers.tar.xz"],
     outs = UCRT_HEADERS_OUTS,
-    cmd_bat = "tar xf $(location @windows-sysroot-x86_64//:ucrt-headers.tar.xz) -C $(RULEDIR)",
+    cmd_bat = "tar xvf $(location @windows-sysroot-x86_64//:ucrt-headers.tar.xz) -C $(RULEDIR)",
     tags = ["no-remote-cache"],
 )
 

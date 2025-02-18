@@ -76,6 +76,10 @@ cc_args(
         "-isystem",
         "{usr_include}",
     ],
+    data = [
+        "//sysroot/windows:include",
+        "//sysroot/windows:root",
+    ],
     format = {
         "usr_include": "//sysroot/windows:include",
     },
