@@ -1,12 +1,10 @@
 load("@rules_cc//cc/toolchains:args.bzl", "cc_args")
 load("@rules_cc//cc/toolchains:args_list.bzl", "cc_args_list")
-load("@rules_cc//cc/toolchains/args:sysroot.bzl", "cc_sysroot")
 
 cc_args_list(
     name = "args",
     args = [
         ":no_canonical_prefixes",
-        ":sysroot",
         ":nostd",
         # ":nostd++",
         ":nostd_link",
@@ -14,17 +12,6 @@ cc_args_list(
         ":link-general",
         # ":link-executable",
     ],
-    visibility = ["//visibility:public"],
-)
-
-cc_sysroot(
-    name = "sysroot",
-    data = [
-        "//sysroot/windows:include",
-        "//sysroot/windows:lib",
-        "//sysroot/windows:root",
-    ],
-    sysroot = "//sysroot/windows:root",
     visibility = ["//visibility:public"],
 )
 
@@ -108,7 +95,7 @@ cc_args(
         # with out this, clang was using /some/long/path/to/link.exe over the lld from the toolchain
         # just make sure if youre ever getting a weird linker error, that with -v, lld is being used
         "-fuse-ld=lld",
-        # "-L{usr_lib}",
+        "-L{lib}",
         # "-lc",
         # "-lc++",
         # "-lc++abi",
@@ -116,9 +103,9 @@ cc_args(
         # "-llzma",
         # "-pthread",
     ],
-    # format = {
-    #     "usr_lib": "//sysroot/alpine:usr-lib",
-    # },
+    format = {
+        "lib": "//sysroot/windows:lib",
+    },
     visibility = ["//visibility:public"],
 )
 
