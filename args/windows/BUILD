@@ -7,9 +7,9 @@ cc_args_list(
         ":no_canonical_prefixes",
         ":nostd",
         # ":nostd++",
-        # ":nostd_link",
+        ":nostd_link",
         ":isystem",
-        # ":link-general",
+        ":link-general",
         # ":link-executable",
     ],
     visibility = ["//visibility:public"],
@@ -51,20 +51,18 @@ cc_args(
 #     visibility = ["//visibility:public"],
 # )
 
-# cc_args(
-#     name = "nostd_link",
-#     actions = [
-#         "@rules_cc//cc/toolchains/actions:link_actions",
-#     ],
-#     args = [
-#         "-nostdinc",
-#         "-nostdlib",
-#         "-nodefaultlibs",
-#         "-nostdinc++",
-#         "-nostdlib++",
-#     ],
-#     visibility = ["//visibility:public"],
-# )
+cc_args(
+    name = "nostd_link",
+    actions = [
+        "@rules_cc//cc/toolchains/actions:link_actions",
+    ],
+    args = [
+        "-nostdlib",
+        "-nodefaultlibs",
+        "-nostdlib++",
+    ],
+    visibility = ["//visibility:public"],
+)
 
 cc_args(
     name = "isystem",
@@ -86,28 +84,28 @@ cc_args(
     visibility = ["//visibility:public"],
 )
 
-# cc_args(
-#     name = "link-general",
-#     actions = [
-#         "@rules_cc//cc/toolchains/actions:link_actions",
-#     ],
-#     args = [
-#         # with out this, clang was using /usr/bin/ld over the lld from the toolchain
-#         # just make sure if youre ever getting a weird linker error, that with -v, lld is being used
-#         "-fuse-ld=lld",
-#         "-L{usr_lib}",
-#         "-lc",
-#         "-lc++",
-#         "-lc++abi",
-#         "-lunwind",
-#         "-llzma",
-#         "-pthread",
-#     ],
-#     format = {
-#         "usr_lib": "//sysroot/alpine:usr-lib",
-#     },
-#     visibility = ["//visibility:public"],
-# )
+cc_args(
+    name = "link-general",
+    actions = [
+        "@rules_cc//cc/toolchains/actions:link_actions",
+    ],
+    args = [
+        # with out this, clang was using /some/long/path/to/link.exe over the lld from the toolchain
+        # just make sure if youre ever getting a weird linker error, that with -v, lld is being used
+        "-fuse-ld=lld",
+        # "-L{usr_lib}",
+        # "-lc",
+        # "-lc++",
+        # "-lc++abi",
+        # "-lunwind",
+        # "-llzma",
+        # "-pthread",
+    ],
+    # format = {
+    #     "usr_lib": "//sysroot/alpine:usr-lib",
+    # },
+    visibility = ["//visibility:public"],
+)
 
 # cc_args(
 #     name = "link-executable",
