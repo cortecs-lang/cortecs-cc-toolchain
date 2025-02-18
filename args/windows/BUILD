@@ -7,7 +7,7 @@ cc_args_list(
         ":no_canonical_prefixes",
         ":nostd",
         # ":nostd++",
-        ":nostd_link",
+        #":nostd_link",
         ":isystem",
         ":link-general",
         # ":link-executable",
@@ -51,18 +51,18 @@ cc_args(
 #     visibility = ["//visibility:public"],
 # )
 
-cc_args(
-    name = "nostd_link",
-    actions = [
-        "@rules_cc//cc/toolchains/actions:link_actions",
-    ],
-    args = [
-        "-nostdlib",
-        "-nodefaultlibs",
-        "-nostdlib++",
-    ],
-    visibility = ["//visibility:public"],
-)
+# cc_args(
+#     name = "nostd_link",
+#     actions = [
+#         "@rules_cc//cc/toolchains/actions:link_actions",
+#     ],
+#     args = [
+#         "-nostdlib",
+#         "-nodefaultlibs",
+#         "-nostdlib++",
+#     ],
+#     visibility = ["//visibility:public"],
+# )
 
 cc_args(
     name = "isystem",
