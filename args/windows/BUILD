@@ -1,5 +1,6 @@
 load("@rules_cc//cc/toolchains:args.bzl", "cc_args")
 load("@rules_cc//cc/toolchains:args_list.bzl", "cc_args_list")
+load("@rules_cc//cc/toolchains/args:sysroot.bzl", "cc_sysroot")
 
 cc_args_list(
     name = "args",
