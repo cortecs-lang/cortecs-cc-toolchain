@@ -92,10 +92,11 @@ cc_args(
         "@rules_cc//cc/toolchains/actions:link_actions",
     ],
     args = [
-        # with out this, clang was using /some/long/path/to/link.exe over the lld from the toolchain
+        # without this, clang was using /some/long/path/to/link.exe over the lld from the toolchain
         # just make sure if youre ever getting a weird linker error, that with -v, lld is being used
         "-fuse-ld=lld",
         "-L{lib}",
+        "-lucrt",
         # "-lc",
         # "-lc++",
         # "-lc++abi",
