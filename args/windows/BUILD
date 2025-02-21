@@ -96,7 +96,7 @@ cc_args(
         # just make sure if youre ever getting a weird linker error, that with -v, lld is being used
         "-fuse-ld=lld",
         "-L{lib}",
-        "-lucrt",
+        # "-lucrt",
         # "-lc",
         # "-lc++",
         # "-lc++abi",
