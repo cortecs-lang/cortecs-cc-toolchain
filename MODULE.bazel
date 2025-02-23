@@ -31,5 +31,5 @@ git_repository(
 git_repository(
     name = "windows-sysroot-x86_64",
     remote = "https://github.com/cortecs-lang/cortecs-sysroot-windows-x86_64.git",
-    commit = "6de37cec2b46b53ef097b680faea528547dc9a9c",
+    commit = "1bb99b80c8e4ac4469015968fbd79fdd4565d5d4",
 )
