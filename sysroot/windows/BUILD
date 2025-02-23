@@ -50,6 +50,12 @@ directory(
 )
 
 subdirectory(
+    name = "cpp-include",
+    parent = ":root",
+    path = "cpp/include",
+)
+
+subdirectory(
     name = "include",
     parent = ":root",
     path = "include",

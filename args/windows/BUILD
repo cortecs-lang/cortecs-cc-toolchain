@@ -74,14 +74,18 @@ cc_args(
     ],
     args = [
         "-isystem",
-        "{usr_include}",
+        "{cpp_include}",
+        "-isystem",
+        "{include}",
     ],
     data = [
+        "//sysroot/windows:cpp-include",
         "//sysroot/windows:include",
         "//sysroot/windows:root",
     ],
     format = {
-        "usr_include": "//sysroot/windows:include",
+        "include": "//sysroot/windows:include",
+        "cpp_include": "//sysroot/windows:cpp-include",
     },
     visibility = ["//visibility:public"],
 )
