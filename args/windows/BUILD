@@ -6,7 +6,7 @@ cc_args_list(
     args = [
         ":no_canonical_prefixes",
         ":nostd",
-        ":nostd++",
+        # ":nostd++",
         ":nostd_link",
         ":isystem",
         ":link-general",
@@ -38,17 +38,19 @@ cc_args(
     visibility = ["//visibility:public"],
 )
 
-cc_args(
-    name = "nostd++",
-    actions = [
-        "@rules_cc//cc/toolchains/actions:cpp_compile_actions",
-    ],
-    args = [
-        "-nostdinc++",
-        "-nostdlib++",
-    ],
-    visibility = ["//visibility:public"],
-)
+# I get a bunch of --unused-command-line-argument errors when using this
+# TODO: figure out how why
+# cc_args(
+#     name = "nostd++",
+#     actions = [
+#         "@rules_cc//cc/toolchains/actions:cpp_compile_actions",
+#     ],
+#     args = [
+#         "-nostdinc++",
+#         "-nostdlib++",
+#     ],
+#     visibility = ["//visibility:public"],
+# )
 
 cc_args(
     name = "nostd_link",
@@ -101,6 +103,13 @@ cc_args(
         "-L{lib}",
         "-llibcmt",
         "-llibcpmt",
+
+        # I was seeing a bunch of missing symbols when linking: creat, open, dup2, etc.
+        # When dumping the static ucrt lib, I saw this:
+        # (ps) dumpbin /symbols libucrt.lib | Select-String "_dup2"
+        # 06D 00000000 SECT34 notype ()    External     | _dup2
+        # msvc at some point supported those symbols without the `_`, but now you need
+        # this lib to convert the old names to the new names.
         "-loldnames",
     ],
     format = {
