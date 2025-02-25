@@ -6,11 +6,10 @@ cc_args_list(
     args = [
         ":no_canonical_prefixes",
         ":nostd",
-        # ":nostd++",
+        ":nostd++",
         ":nostd_link",
         ":isystem",
         ":link-general",
-        # ":link-executable",
     ],
     visibility = ["//visibility:public"],
 )
@@ -39,17 +38,17 @@ cc_args(
     visibility = ["//visibility:public"],
 )
 
-# cc_args(
-#     name = "nostd++",
-#     actions = [
-#         "@rules_cc//cc/toolchains/actions:cpp_compile_actions",
-#     ],
-#     args = [
-#         "-nostdinc++",
-#         "-nostdlib++",
-#     ],
-#     visibility = ["//visibility:public"],
-# )
+cc_args(
+    name = "nostd++",
+    actions = [
+        "@rules_cc//cc/toolchains/actions:cpp_compile_actions",
+    ],
+    args = [
+        "-nostdinc++",
+        "-nostdlib++",
+    ],
+    visibility = ["//visibility:public"],
+)
 
 cc_args(
     name = "nostd_link",
@@ -100,32 +99,12 @@ cc_args(
         # just make sure if youre ever getting a weird linker error, that with -v, lld is being used
         "-fuse-ld=lld",
         "-L{lib}",
-        # "-lucrt",
-        # "-lc",
-        # "-lc++",
-        # "-lc++abi",
-        # "-lunwind",
-        # "-llzma",
-        # "-pthread",
+        "-llibcmt",
+        "-llibcpmt",
+        "-loldnames",
     ],
     format = {
         "lib": "//sysroot/windows:lib",
     },
     visibility = ["//visibility:public"],
 )
-
-# cc_args(
-#     name = "link-executable",
-#     actions = [
-#         "@rules_cc//cc/toolchains/actions:link_executable_actions",
-#     ],
-#     args = [
-#         "{usr_lib}/crt1.o",
-#         "{usr_lib}/crti.o",
-#         "{usr_lib}/crtn.o",
-#     ],
-#     format = {
-#         "usr_lib": "//sysroot/alpine:usr-lib",
-#     },
-#     visibility = ["//visibility:public"],
-# )

@@ -11,7 +11,7 @@ genrule(
     name = "msvcrt-headers",
     srcs = ["@windows-sysroot-x86_64//:msvcrt-headers.tar.xz"],
     outs = MSVCRT_HEADERS_OUTS,
-    cmd_bat = "tar xvf $(location @windows-sysroot-x86_64//:msvcrt-headers.tar.xz) -C $(RULEDIR)",
+    cmd_bat = "tar xf $(location @windows-sysroot-x86_64//:msvcrt-headers.tar.xz) -C $(RULEDIR)",
     tags = ["no-remote-cache"],
 )
 
@@ -19,7 +19,7 @@ genrule(
     name = "ucrt",
     srcs = ["@windows-sysroot-x86_64//:ucrt.tar.xz"],
     outs = UCRT_OUTS,
-    cmd_bat = "tar xvf $(location @windows-sysroot-x86_64//:ucrt.tar.xz) -C $(RULEDIR)",
+    cmd_bat = "tar xf $(location @windows-sysroot-x86_64//:ucrt.tar.xz) -C $(RULEDIR)",
     tags = ["no-remote-cache"],
 )
 
@@ -27,7 +27,7 @@ genrule(
     name = "windows-sdk-headers",
     srcs = ["@windows-sysroot-x86_64//:windows-sdk-headers.tar.xz"],
     outs = WINDOWS_SDK_HEADERS_OUTS,
-    cmd_bat = "tar xvf $(location @windows-sysroot-x86_64//:windows-sdk-headers.tar.xz) -C $(RULEDIR)",
+    cmd_bat = "tar xf $(location @windows-sysroot-x86_64//:windows-sdk-headers.tar.xz) -C $(RULEDIR)",
     tags = ["no-remote-cache"],
 )
 
@@ -35,7 +35,7 @@ genrule(
     name = "windows-shared-headers",
     srcs = ["@windows-sysroot-x86_64//:windows-shared-headers.tar.xz"],
     outs = WINDOWS_SHARED_HEADERS_OUTS,
-    cmd_bat = "tar xvf $(location @windows-sysroot-x86_64//:windows-shared-headers.tar.xz) -C $(RULEDIR)",
+    cmd_bat = "tar xf $(location @windows-sysroot-x86_64//:windows-shared-headers.tar.xz) -C $(RULEDIR)",
     tags = ["no-remote-cache"],
 )
 
