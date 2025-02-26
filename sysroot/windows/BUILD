@@ -9,33 +9,33 @@ package(default_visibility = ["//visibility:public"])
 
 genrule(
     name = "msvcrt-headers",
-    srcs = ["@windows-sysroot-x86_64//:msvcrt-headers.tar.xz"],
+    srcs = ["@windows-sysroot-x86_64//:msvcrt-headers.tar.gz"],
     outs = MSVCRT_HEADERS_OUTS,
-    cmd_bat = "tar xf $(location @windows-sysroot-x86_64//:msvcrt-headers.tar.xz) -C $(RULEDIR)",
+    cmd_bat = "tar xf $(location @windows-sysroot-x86_64//:msvcrt-headers.tar.gz) -C $(RULEDIR)",
     tags = ["no-remote-cache"],
 )
 
 genrule(
     name = "ucrt",
-    srcs = ["@windows-sysroot-x86_64//:ucrt.tar.xz"],
+    srcs = ["@windows-sysroot-x86_64//:ucrt.tar.gz"],
     outs = UCRT_OUTS,
-    cmd_bat = "tar xf $(location @windows-sysroot-x86_64//:ucrt.tar.xz) -C $(RULEDIR)",
+    cmd_bat = "tar xf $(location @windows-sysroot-x86_64//:ucrt.tar.gz) -C $(RULEDIR)",
     tags = ["no-remote-cache"],
 )
 
 genrule(
     name = "windows-sdk-headers",
-    srcs = ["@windows-sysroot-x86_64//:windows-sdk-headers.tar.xz"],
+    srcs = ["@windows-sysroot-x86_64//:windows-sdk-headers.tar.gz"],
     outs = WINDOWS_SDK_HEADERS_OUTS,
-    cmd_bat = "tar xf $(location @windows-sysroot-x86_64//:windows-sdk-headers.tar.xz) -C $(RULEDIR)",
+    cmd_bat = "tar xf $(location @windows-sysroot-x86_64//:windows-sdk-headers.tar.gz) -C $(RULEDIR)",
     tags = ["no-remote-cache"],
 )
 
 genrule(
     name = "windows-shared-headers",
-    srcs = ["@windows-sysroot-x86_64//:windows-shared-headers.tar.xz"],
+    srcs = ["@windows-sysroot-x86_64//:windows-shared-headers.tar.gz"],
     outs = WINDOWS_SHARED_HEADERS_OUTS,
-    cmd_bat = "tar xf $(location @windows-sysroot-x86_64//:windows-shared-headers.tar.xz) -C $(RULEDIR)",
+    cmd_bat = "tar xf $(location @windows-sysroot-x86_64//:windows-shared-headers.tar.gz) -C $(RULEDIR)",
     tags = ["no-remote-cache"],
 )
 

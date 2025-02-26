@@ -25,11 +25,11 @@ git_repository(
 git_repository(
     name = "windows-x86_64",
     remote = "https://github.com/cortecs-lang/cortecs-cc-toolchain-windows-x86_64.git",
-    commit = "d53771c1bcb4290a8fb1c54516510acffb2a140d",
+    commit = "5d014ffb5d470dfc7c1f0a984f482e2ddcc12221",
 )
 
 git_repository(
     name = "windows-sysroot-x86_64",
     remote = "https://github.com/cortecs-lang/cortecs-sysroot-windows-x86_64.git",
-    commit = "fd7cf5a8cec61c86b9ef2337c03dd1430686c874",
+    commit = "4581a0929dc46a1862e7a08248ab08d7a7687947",
 )

@@ -16,11 +16,11 @@ package(default_visibility = ["//visibility:public"])
 genrule(
     name = "produce_clang",
     srcs = select({
-        "//constraint:linux_x86_64": ["@linux-x86_64//:clang.tar.xz"],
+        "//constraint:linux_x86_64": ["@linux-x86_64//:clang.tar.gz"],
     }),
     outs = ["clang"],
     cmd = select({
-        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:clang.tar.xz) -C $(@D)",
+        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:clang.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -28,11 +28,11 @@ genrule(
 genrule(
     name = "produce_clang_exe",
     srcs = select({
-        "//constraint:windows_x86_64": ["@windows-x86_64//:clang.exe.tar.xz"],
+        "//constraint:windows_x86_64": ["@windows-x86_64//:clang.exe.tar.gz"],
     }),
     outs = ["clang.exe"],
     cmd_bat = select({
-        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:clang.exe.tar.xz) -C $(@D)",
+        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:clang.exe.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -52,11 +52,11 @@ genrule(
 genrule(
     name = "produce_clang++_exe",
     srcs = select({
-        "//constraint:windows_x86_64": ["@windows-x86_64//:clang++.exe.tar.xz"],
+        "//constraint:windows_x86_64": ["@windows-x86_64//:clang++.exe.tar.gz"],
     }),
     outs = ["clang++.exe"],
     cmd_bat = select({
-        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:clang++.exe.tar.xz) -C $(@D)",
+        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:clang++.exe.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -64,11 +64,11 @@ genrule(
 genrule(
     name = "produce_llvm-ar",
     srcs = select({
-        "//constraint:linux_x86_64": ["@linux-x86_64//:llvm-ar.tar.xz"],
+        "//constraint:linux_x86_64": ["@linux-x86_64//:llvm-ar.tar.gz"],
     }),
     outs = ["llvm-ar"],
     cmd = select({
-        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:llvm-ar.tar.xz) -C $(@D)",
+        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:llvm-ar.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -76,11 +76,11 @@ genrule(
 genrule(
     name = "produce_llvm-ar_exe",
     srcs = select({
-        "//constraint:windows_x86_64": ["@windows-x86_64//:llvm-ar.exe.tar.xz"],
+        "//constraint:windows_x86_64": ["@windows-x86_64//:llvm-ar.exe.tar.gz"],
     }),
     outs = ["llvm-ar.exe"],
     cmd_bat = select({
-        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:llvm-ar.exe.tar.xz) -C $(@D)",
+        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:llvm-ar.exe.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -88,11 +88,11 @@ genrule(
 genrule(
     name = "produce_llvm-objdump",
     srcs = select({
-        "//constraint:linux_x86_64": ["@linux-x86_64//:llvm-objdump.tar.xz"],
+        "//constraint:linux_x86_64": ["@linux-x86_64//:llvm-objdump.tar.gz"],
     }),
     outs = ["llvm-objdump"],
     cmd = select({
-        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:llvm-objdump.tar.xz) -C $(@D)",
+        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:llvm-objdump.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -100,11 +100,11 @@ genrule(
 genrule(
     name = "produce_llvm-objdump_exe",
     srcs = select({
-        "//constraint:windows_x86_64": ["@windows-x86_64//:llvm-objdump.exe.tar.xz"],
+        "//constraint:windows_x86_64": ["@windows-x86_64//:llvm-objdump.exe.tar.gz"],
     }),
     outs = ["llvm-objdump.exe"],
     cmd_bat = select({
-        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:llvm-objdump.exe.tar.xz) -C $(@D)",
+        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:llvm-objdump.exe.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -112,11 +112,11 @@ genrule(
 genrule(
     name = "produce_llvm-objcopy",
     srcs = select({
-        "//constraint:linux_x86_64": ["@linux-x86_64//:llvm-objcopy.tar.xz"],
+        "//constraint:linux_x86_64": ["@linux-x86_64//:llvm-objcopy.tar.gz"],
     }),
     outs = ["llvm-objcopy"],
     cmd = select({
-        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:llvm-objcopy.tar.xz) -C $(@D)",
+        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:llvm-objcopy.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -124,11 +124,11 @@ genrule(
 genrule(
     name = "produce_llvm-objcopy_exe",
     srcs = select({
-        "//constraint:windows_x86_64": ["@windows-x86_64//:llvm-objcopy.exe.tar.xz"],
+        "//constraint:windows_x86_64": ["@windows-x86_64//:llvm-objcopy.exe.tar.gz"],
     }),
     outs = ["llvm-objcopy.exe"],
     cmd_bat = select({
-        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:llvm-objcopy.exe.tar.xz) -C $(@D)",
+        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:llvm-objcopy.exe.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -148,11 +148,11 @@ genrule(
 genrule(
     name = "produce_llvm-strip_exe",
     srcs = select({
-        "//constraint:windows_x86_64": ["@windows-x86_64//:llvm-strip.exe.tar.xz"],
+        "//constraint:windows_x86_64": ["@windows-x86_64//:llvm-strip.exe.tar.gz"],
     }),
     outs = ["llvm-strip.exe"],
     cmd_bat = select({
-        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:llvm-strip.exe.tar.xz) -C $(@D)",
+        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:llvm-strip.exe.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -178,11 +178,11 @@ filegroup(
 genrule(
     name = "produce_lld",
     srcs = select({
-        "//constraint:linux_x86_64": ["@linux-x86_64//:lld.tar.xz"],
+        "//constraint:linux_x86_64": ["@linux-x86_64//:lld.tar.gz"],
     }),
     outs = ["lld"],
     cmd = select({
-        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:lld.tar.xz) -C $(@D)",
+        "//constraint:linux_x86_64": "tar xf $(location @linux-x86_64//:lld.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -190,11 +190,11 @@ genrule(
 genrule(
     name = "produce_lld_exe",
     srcs = select({
-        "//constraint:windows_x86_64": ["@windows-x86_64//:lld.exe.tar.xz"],
+        "//constraint:windows_x86_64": ["@windows-x86_64//:lld.exe.tar.gz"],
     }),
     outs = ["lld.exe"],
     cmd_bat = select({
-        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:lld.exe.tar.xz) -C $(@D)",
+        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:lld.exe.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -214,11 +214,11 @@ genrule(
 genrule(
     name = "produce_ld_lld_exe",
     srcs = select({
-        "//constraint:windows_x86_64": ["@windows-x86_64//:ld.lld.exe.tar.xz"],
+        "//constraint:windows_x86_64": ["@windows-x86_64//:ld.lld.exe.tar.gz"],
     }),
     outs = ["ld.lld.exe"],
     cmd_bat = select({
-        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:ld.lld.exe.tar.xz) -C $(@D)",
+        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:ld.lld.exe.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -238,11 +238,11 @@ genrule(
 genrule(
     name = "produce_ld64_lld_exe",
     srcs = select({
-        "//constraint:windows_x86_64": ["@windows-x86_64//:ld64.lld.exe.tar.xz"],
+        "//constraint:windows_x86_64": ["@windows-x86_64//:ld64.lld.exe.tar.gz"],
     }),
     outs = ["ld64.lld.exe"],
     cmd_bat = select({
-        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:ld64.lld.exe.tar.xz) -C $(@D)",
+        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:ld64.lld.exe.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
@@ -262,11 +262,11 @@ genrule(
 genrule(
     name = "produce_lld-link_exe",
     srcs = select({
-        "//constraint:windows_x86_64": ["@windows-x86_64//:lld-link.exe.tar.xz"],
+        "//constraint:windows_x86_64": ["@windows-x86_64//:lld-link.exe.tar.gz"],
     }),
     outs = ["lld-link.exe"],
     cmd_bat = select({
-        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:lld-link.exe.tar.xz) -C $(@D)",
+        "//constraint:windows_x86_64": "tar xf $(location @windows-x86_64//:lld-link.exe.tar.gz) -C $(@D)",
     }),
     tags = ["no-remote-cache"],
 )
