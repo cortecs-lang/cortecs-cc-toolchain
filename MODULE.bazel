@@ -25,7 +25,7 @@ git_repository(
 git_repository(
     name = "windows-x86_64",
     remote = "https://github.com/cortecs-lang/cortecs-cc-toolchain-windows-x86_64.git",
-    commit = "5d014ffb5d470dfc7c1f0a984f482e2ddcc12221",
+    commit = "fcdfef684d5b575ba84a5732beecd6c698f093de",
 )
 
 git_repository(
